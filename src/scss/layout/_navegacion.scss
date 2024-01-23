@@ -1,0 +1,64 @@
+.barra{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 3rem;
+    }
+
+    .a-header{
+        font-size: 5rem;
+        font-family: $fuente_header;
+        text-align: center;
+        font-weight: 300;
+        color: $negro;
+        font-weight: bold;
+    
+        span{
+            font-weight: normal;
+            color: $blanco;
+        }
+    }
+}
+
+.navegacion{
+    
+    // visibility: hidden;
+    // opacity: 0;
+    // transition: visibility .3s ease-in-out, opacity .5s linear, height .5s linear;
+    // height: 0;
+
+    @include tablet {
+        display: flex;
+        align-items: center;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    a{
+        font-family: $fuente_header;
+        font-weight: 800;
+        font-size: 2.2rem;
+        color: $blanco;
+
+        display: block;
+        text-align: center;
+
+        @include tablet {
+            margin-right: 2rem;
+            font-size: 2rem;
+
+            &:last-of-type{
+                margin-right: 0;
+            }
+        }
+
+        &:hover{
+            font-size: 2.5rem;
+        }
+    }
+}

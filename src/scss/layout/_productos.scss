@@ -1,0 +1,80 @@
+.productos{
+
+    .info-publicidad{
+        @include grid(2, 2);
+
+        @include tablet {
+            @include grid(3, 2);
+            margin-right: 0;
+        }
+    }
+
+    .publicidad{
+        cursor: pointer;
+        padding-bottom: .5rem;
+        margin-right: 2rem;
+
+        @include tablet{
+            background-color: white;
+            padding: .5rem;
+
+            &:hover{
+                background-color: $quinto;
+                padding: .5rem;
+            }
+        }
+
+        .diseño-producto{
+            background-color: $quinto;
+            padding: .5rem;
+
+            @include tablet {
+                background-color: white;
+            }
+        }
+
+        &::last-of-type{
+            margin-right: 0;
+        }
+    }
+
+    .agregar{
+
+        @include tablet {
+            @include grid(2, 2);
+
+            p{
+                margin: 2rem;
+                text-align: center;
+            }
+            form{
+                margin: 2rem;
+            }
+        }
+    
+        p{
+            margin: 0;
+            font-weight: bold;
+            color: $terciario;
+        }
+        form{
+            margin: 0;
+        }
+
+        margin-bottom: 2rem;
+    }
+}
+
+// .boton{
+//     background-color: $sexto;
+//     color: $blanco;
+//     font-weight: bold;
+//     border: none;
+//     padding: 1rem 2rem;
+//     border-radius: 1rem;
+//     font-size: 1.8rem;
+//     cursor: pointer;
+
+//     transition-property: background-color;
+//     transition-duration: .3s;
+// }

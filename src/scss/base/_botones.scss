@@ -1,0 +1,21 @@
+.boton-carrito-v1{
+    @include boton($sexto, inline-block);
+    @include tablet {
+        width: 85%;
+    }
+}
+.boton-carrito-v2{
+    @include boton($sexto, block)
+}
+.boton-submit{
+    @include boton($primario, inline-block);
+    @include tablet {
+        width: auto;
+    }
+}
+.boton-verde{
+    @include boton($verde, inline-block)
+}
+.boton-datos{
+    @include boton($sexto, inline-block)
+}

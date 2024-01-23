@@ -1,0 +1,19 @@
+{
+    "name": "diego/kero-shop",
+    "description": "Proyecto de ropa",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Diego Armando Cruz Sepulveda",
+            "email": "diegocruzsep@gmail.com"
+        }
+    ],
+    "require": {
+        "intervention/image": "^2.5"
+    },
+    "autoload":{
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}

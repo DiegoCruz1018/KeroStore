@@ -1,0 +1,32 @@
+.no-webp .inicio{
+    background-image: url(../img/logo-header2.jpeg);
+}
+
+.webp .inicio{
+    background-image: url(../img/logo-header2.webp);
+}
+
+.header{
+    background-color: $primario;
+    padding: 1rem 0 2rem 0;
+
+    &.inicio{
+        background-position: top center;
+        background-size: cover;
+
+        @include tablet {
+            min-height: 70rem;
+        }
+    }
+
+}
+
+// .contenido-header{
+//     display: flex;  
+//     flex-direction: column;
+//     justify-content: space-between;
+
+//     @include telefono{
+//         text-align: center;
+//     }
+// }
