@@ -1,6 +1,13 @@
 <?php 
     require '../includes/app.php';
 
+    estaAutenticado();
+
+    use App\Producto;
+
+    //Implementar un método para obtener todas las propiedades
+    $productos = Producto::all();
+
     //Muestra mensaje condicional
     $resultado = $_GET['resultado'] ?? null;
 
@@ -37,13 +44,14 @@
         <tbody>
             <?php foreach($productos as $producto): ?>
                 <tr>
-                    <td>  </td>
-                    <td>  </td>
+                    <td> <?php echo $producto->id; ?> </td>
+                    <td> <?php echo $producto->nombre; ?> </td>
                     <td>
-                        <img src="../imagenes/" class="imagen-tabla"> 
+                        <img src="../imagenes/<?php echo $producto->imagen; ?>" class="imagen-tabla"> 
                     </td>
-                    <td></td>
-                    <td> </td>
+                    <td> <?php echo "$" . number_format($producto->precio); ?> </td>
+                    <td> <?php echo $producto->cantidad; ?> </td>
+                    <td> <?php echo $producto->idCategoria; ?> </td>
                     <td></td>
                 </tr>
             <?php endforeach; ?>

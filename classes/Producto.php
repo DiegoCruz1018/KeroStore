@@ -56,12 +56,6 @@ class Producto{
         return $resultado;
     }
 
-    public static function all(){
-        $query = "SELECT * FROM productos";
-
-        $resultado = self::$db->query($query);
-    }
-
     //Identificar y unir los atributos de la BD
     public function atributos(){
         $atributos = [];
@@ -126,5 +120,46 @@ class Producto{
         }
 
         return self::$errores;
+    }
+
+    //Lista todas las propiedades
+    public static function all(){
+
+        $query = "SELECT * FROM productos";
+
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
+    }
+
+    public static function consultarSQL($query){
+
+        //Consultar la base de datos
+        $resultado = self::$db->query($query);
+
+        //Iterar los resultados
+        $array = [];
+
+        while($registro = $resultado->fetch_assoc()){
+            $array[] = self::crearObjecto($registro);
+        }
+
+        //Liberar la memoria
+        $resultado->free();
+
+        //Retornar los resultados
+        return $array;
+    }
+
+    protected static function crearObjecto($registro){
+        $objecto = new self;
+
+        foreach($registro as $key => $value){
+            if(property_exists($objecto, $key)){
+                $objecto->$key = $value;
+            }
+        }
+
+        return $objecto;
     }
 }
