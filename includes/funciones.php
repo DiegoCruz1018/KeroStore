@@ -40,3 +40,10 @@ function mostrarNotificacion($codigo){
 
     return $mensaje;
 }
+
+//Escapa (Sanitizar) el HTML
+function s($html) : string{
+    $s = htmlspecialchars($html);
+
+    return $s;
+}

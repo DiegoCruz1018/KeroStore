@@ -37,7 +37,6 @@
                 <th>Imagen</th>
                 <th>Precio</th>
                 <th>Cantidad</th>
-                <th>Categoria</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -51,7 +50,6 @@
                     </td>
                     <td> <?php echo "$" . number_format($producto->precio); ?> </td>
                     <td> <?php echo $producto->cantidad; ?> </td>
-                    <td> <?php echo $producto->idCategoria; ?> </td>
                     <td></td>
                 </tr>
             <?php endforeach; ?>
