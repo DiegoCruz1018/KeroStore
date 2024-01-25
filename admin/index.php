@@ -50,7 +50,15 @@
                     </td>
                     <td> <?php echo "$" . number_format($producto->precio); ?> </td>
                     <td> <?php echo $producto->cantidad; ?> </td>
-                    <td></td>
+                    <td>
+                        <form method="POST" class="w-100">
+                            <input type="hidden" name="id" value="<?php echo $producto->id; ?>">
+                            <input type="hidden" name="tipo" value="producto">
+                            <input type="submit" class="boton-rojo-block" value="Eliminar">
+                        </form>
+
+                        <a href="/kerostore/admin/productos/actualizar.php?id=<?php echo $producto->id; ?>" class="boton-verde-block">Actualizar</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

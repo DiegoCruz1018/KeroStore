@@ -81,6 +81,17 @@ class Producto{
 
     //Subida de archivos
     public function setImagen($imagen){
+
+        //Elimina la imagen anterior
+        if($this->id){
+            //Comprobar si existe el archivo
+            $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+
+            if($existeArchivo){
+                //unlink es para eliminar
+                unlink(CARPETA_IMAGENES . $this->imagen);
+            }
+        }
         
         //Asignar al atributo de imagen el nombre de la imagen
         if($imagen){
@@ -122,14 +133,25 @@ class Producto{
         return self::$errores;
     }
 
-    //Lista todas las propiedades
+    //Lista todas los productos
     public static function all(){
 
         $query = "SELECT * FROM productos";
 
+        //Transformar los arreglos en objetos (Un arreglo de objetos)
         $resultado = self::consultarSQL($query);
 
         return $resultado;
+    }
+
+    //Buscar una propiedad por su ID
+    public static function find($id){
+
+        $query = "SELECT * FROM productos WHERE id = $id";
+
+        $resultado = self::consultarSQL($query);
+
+        return array_shift($resultado);
     }
 
     public static function consultarSQL($query){
@@ -161,5 +183,14 @@ class Producto{
         }
 
         return $objecto;
+    }
+
+    //Sincroniza el objeto en memoria con los cambios realizados por el usuario
+    public function sincronizar($args = []){
+        foreach($args as $key => $value){
+            if(property_exists($this, $key) && !is_null($value)){
+                $this->$key = $value;
+            }
+        }
     }
 }

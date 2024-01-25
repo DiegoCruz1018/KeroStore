@@ -1,6 +1,8 @@
 <?php
     require '../../includes/app.php';
 
+    estaAutenticado();
+
     use App\Producto;
     use Intervention\Image\ImageManagerStatic as Image;
 

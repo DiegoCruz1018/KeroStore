@@ -34,11 +34,4 @@
             </option>
         <?php //endforeach; ?> 
     </select> -->
-
-        <select name="idCategoria">
-            <option value="">-- Seleccione --</option>
-            <?php while($categoria = mysqli_fetch_assoc($resultado)): ?>
-                <option <?php echo $idCategoria === $categoria['id'] ? 'selected' : ''; ?> value="<?php echo $categoria['id']; ?>"> <?php echo $categoria['categoria']; ?> </option>
-            <?php endwhile; ?>
-        </select>
 </fieldset>
