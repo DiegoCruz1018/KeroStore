@@ -38,6 +38,16 @@ class Producto{
     }
 
     public function guardar(){
+        if(isset($this->id)){
+            //Actualizar
+            $this->actualizar();
+        }else{
+            //Creando un nuevo registro
+            $this->crear();
+        }
+    }
+
+    public function crear(){
 
         //Sanitizar los datos
         $atributos = $this->sanitizarAtributos();
@@ -53,7 +63,36 @@ class Producto{
 
         $resultado = self::$db->query($query);
 
-        return $resultado;
+        //Mensaje de exito o error
+        if($resultado){
+            //Redireccionar al usuario
+            header('Location: /kerostore/admin/index.php?resultado=1');
+        }
+    }
+
+    public function actualizar(){
+
+        //Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+
+        $valores = [];
+
+        foreach($atributos as $key => $value){
+            $valores[] = "$key= '$value'";
+        }
+
+        $query = "UPDATE productos SET ";
+        $query .= join(', ', $valores);
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1";
+
+        $resultado = self::$db->query($query);
+
+        //Mensaje de exito o error
+        if($resultado){
+            //Redireccionar al usuario
+            header('Location: /kerostore/admin/index.php?resultado=2');
+        }
     }
 
     //Identificar y unir los atributos de la BD
@@ -83,7 +122,7 @@ class Producto{
     public function setImagen($imagen){
 
         //Elimina la imagen anterior
-        if($this->id){
+        if(isset($this->id)){
             //Comprobar si existe el archivo
             $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
 

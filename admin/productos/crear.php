@@ -52,13 +52,7 @@
             $image->save(CARPETA_IMAGENES . $nombreImagen);
 
             //Guarda en la base de datos
-            $resultado = $producto->guardar();
-
-            //Mensaje de exito o error
-            if($resultado){
-                //Redireccionar al usuario
-                header('Location: /KeroStore/admin?resultado=1');
-            }
+            $producto->guardar();
         }
     }
 

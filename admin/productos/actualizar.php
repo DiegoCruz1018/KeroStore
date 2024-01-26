@@ -43,10 +43,12 @@
             $producto->setImagen($nombreImagen);
         }
 
-        debuguear($producto);
-
         if(empty($errores)){
-            exit;
+
+            //Almacenar la imagen
+            $image->save(CARPETA_IMAGENES . $nombreImagen);
+
+            $producto->guardar();
         }
     }
 
