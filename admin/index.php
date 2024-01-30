@@ -11,6 +11,17 @@
     //Muestra mensaje condicional
     $resultado = $_GET['resultado'] ?? null;
 
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $id = $_POST['id'];
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+
+        if($id){
+            $producto = Producto::find($id);
+
+            $producto->eliminar();
+        }
+    }
+
     incluirTemplate('header');
 ?>
 
@@ -36,7 +47,7 @@
                 <th>Nombre</th>
                 <th>Imagen</th>
                 <th>Precio</th>
-                <th>Cantidad</th>
+                <th>Cantidad de Piezas</th>
                 <th>Acciones</th>
             </tr>
         </thead>

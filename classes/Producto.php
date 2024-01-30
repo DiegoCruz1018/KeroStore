@@ -38,7 +38,7 @@ class Producto{
     }
 
     public function guardar(){
-        if(isset($this->id)){
+        if(!is_null($this->id)){
             //Actualizar
             $this->actualizar();
         }else{
@@ -95,6 +95,21 @@ class Producto{
         }
     }
 
+    //Eliminar un registro
+    public function eliminar(){
+        $query = "DELETE FROM productos WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+
+        $resultado = self::$db->query($query);
+
+        if($resultado){
+
+            $this->borrarImagen();
+
+            //Redireccionar al usuario
+            header('Location: /kerostore/admin/index.php?resultado=3');
+        }
+    }
+
     //Identificar y unir los atributos de la BD
     public function atributos(){
         $atributos = [];
@@ -122,19 +137,24 @@ class Producto{
     public function setImagen($imagen){
 
         //Elimina la imagen anterior
-        if(isset($this->id)){
-            //Comprobar si existe el archivo
-            $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-
-            if($existeArchivo){
-                //unlink es para eliminar
-                unlink(CARPETA_IMAGENES . $this->imagen);
-            }
+        if(!is_null($this->id)){
+            $this->borrarImagen();
         }
         
         //Asignar al atributo de imagen el nombre de la imagen
         if($imagen){
             $this->imagen = $imagen;
+        }
+    }
+
+    //Elimina el archivo
+    public function borrarImagen(){
+        //Comprobar si existe el archivo
+        $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
+
+        if($existeArchivo){
+            //unlink es para eliminar
+            unlink(CARPETA_IMAGENES . $this->imagen);
         }
     }
 
