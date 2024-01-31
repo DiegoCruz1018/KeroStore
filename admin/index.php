@@ -4,9 +4,13 @@
     estaAutenticado();
 
     use App\Producto;
+    use App\Categoria;
 
     //Implementar un método para obtener todas las propiedades
     $productos = Producto::all();
+    $categorias = Categoria::all();
+
+    debuguear($productos);
 
     //Muestra mensaje condicional
     $resultado = $_GET['resultado'] ?? null;
