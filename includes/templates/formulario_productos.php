@@ -26,12 +26,12 @@
 
     <label for="categoria">Categoría</label>
 
-    <!-- <select name="producto[idCategoria]" id="categoria">
+    <select name="producto[idCategoria]" id="categoria">
         <option selected value="">-- Seleccione --</option>
-        <?php //foreach($categorias as $categoria): ?>
-            <option <?php //echo $producto->idCategoria === $categoria->id ? 'selected' : '' ?> 
-                value="<?php //echo $categoria->id; ?>" > <?php //echo $categoria->nombre ?> 
+        <?php foreach($categorias as $categoria): ?>
+            <option <?php echo $producto->idCategoria === $categoria->id ? 'selected' : '' ?> 
+                value="<?php echo s($categoria->id); ?>" > <?php echo s($categoria->nombre) ?> 
             </option>
-        <?php //endforeach; ?> 
-    </select> -->
+        <?php endforeach; ?> 
+    </select>
 </fieldset>

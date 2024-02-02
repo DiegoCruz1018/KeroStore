@@ -4,13 +4,9 @@
     estaAutenticado();
 
     use App\Producto;
-    use App\Categoria;
 
     //Implementar un método para obtener todas las propiedades
     $productos = Producto::all();
-    $categorias = Categoria::all();
-
-    debuguear($productos);
 
     //Muestra mensaje condicional
     $resultado = $_GET['resultado'] ?? null;
@@ -20,9 +16,16 @@
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if($id){
-            $producto = Producto::find($id);
 
-            $producto->eliminar();
+            $tipo = $_POST['tipo'];
+
+            if(validarTipoContenido($tipo)){
+                //Compara lo que vamos a eliminar
+                if($tipo === 'producto'){
+                    $producto = Producto::find($id);
+                    $producto->eliminar();
+                }
+            }
         }
     }
 
@@ -40,6 +43,7 @@
     <?php endif; ?>
 
     <a href="/kerostore/admin/productos/crear.php" class="boton-verde">Nuevo Producto</a>
+    <a href="/kerostore/admin/indexCategorias.php" class="boton-datos">Categorias</a>
     <a href="/kerostore/admin/productos/crear.php" class="boton-datos">Usuarios</a>
 
     <h2>Productos</h2>

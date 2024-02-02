@@ -5,6 +5,7 @@
     estaAutenticado();
 
     use App\Producto;
+    use App\Categoria;
     use Intervention\Image\ImageManagerStatic as Image;
 
     //Validar la URL por ID válido
@@ -17,6 +18,9 @@
 
     //Obtener los datos del producto
     $producto = Producto::find($id);
+
+    //Obtener todas las categorias
+    $categorias = Categoria::all();
 
     //Arreglo con errores
     $errores = Producto::getErrores(); 
@@ -45,8 +49,10 @@
 
         if(empty($errores)){
 
-            //Almacenar la imagen
-            $image->save(CARPETA_IMAGENES . $nombreImagen);
+            if($_FILES['producto']['tmp_name']['imagen']){
+                //Almacenar la imagen
+                $image->save(CARPETA_IMAGENES . $nombreImagen);
+            }
 
             $producto->guardar();
         }

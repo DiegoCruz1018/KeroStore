@@ -93,7 +93,7 @@ class ActiveRecord {
     public function atributos(){
         $atributos = [];
 
-        foreach(self::$columnasDB as $columna){
+        foreach(static::$columnasDB as $columna){
             if($columna === 'id') continue;
             $atributos[$columna] = $this->$columna;
         }
@@ -139,36 +139,13 @@ class ActiveRecord {
 
     //Validación
     public static function getErrores(){
-        return self::$errores;
+        return static::$errores;
     }
 
     public function validar(){
 
-        if(!$this->nombre){
-            self::$errores[] = "Debes añadir un nombre";
-        }
-
-        if(!$this->imagen){
-            self::$errores[] = "La imagen es obligatoria";
-        }
-
-        if(!$this->precio){
-            self::$errores[] = "El precio es obligatorio";
-        }
-
-        if(!$this->cantidad){
-            self::$errores[] = "La cantidad de piezas es obligatorio";
-        }
-
-        if(!$this->talla){
-            self::$errores[] = "La talla es obligatoria";
-        }
-
-        if(!$this->idCategoria){
-            self::$errores[] = "Debes añadir una categoría";
-        }
-
-        return self::$errores;
+        static::$errores = [];
+        return static::$errores;
     }
 
     //Lista todas los productos
@@ -201,7 +178,7 @@ class ActiveRecord {
         $array = [];
 
         while($registro = $resultado->fetch_assoc()){
-            $array[] = self::crearObjecto($registro);
+            $array[] = static::crearObjecto($registro);
         }
 
         //Liberar la memoria

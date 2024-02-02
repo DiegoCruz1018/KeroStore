@@ -27,4 +27,33 @@ class Producto extends ActiveRecord{
         $this->talla = $args['talla'] ?? '';
         $this->creado = date('Y-m-d');
     }
+
+    public function validar(){
+
+        if(!$this->nombre){
+            self::$errores[] = "Debes añadir un nombre";
+        }
+
+        if(!$this->imagen){
+            self::$errores[] = "La imagen es obligatoria";
+        }
+
+        if(!$this->precio){
+            self::$errores[] = "El precio es obligatorio";
+        }
+
+        if(!$this->cantidad){
+            self::$errores[] = "La cantidad de piezas es obligatorio";
+        }
+
+        if(!$this->talla){
+            self::$errores[] = "La talla es obligatoria";
+        }
+
+        if(!$this->idCategoria){
+            self::$errores[] = "Debes añadir una categoría";
+        }
+
+        return self::$errores;
+    }
 }

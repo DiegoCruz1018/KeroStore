@@ -4,6 +4,7 @@
     estaAutenticado();
 
     use App\Producto;
+    use App\Categoria;
     use Intervention\Image\ImageManagerStatic as Image;
 
     //Se necesita que el usuario este autenticado
@@ -12,6 +13,9 @@
     $db = conectarDB();
 
     $producto = new Producto;
+
+    //Consulta para obtener todas las categorias
+    $categorias = Categoria::all();
 
     //Consultar para obtener las categorias
     $consulta = "SELECT * FROM categorias";
