@@ -84,8 +84,6 @@
     </table>
 </main>
 
-class="enlace-producto" href="../producto.php?id=<?php echo $producto->id; ?>"
-
 <?php 
     incluirTemplate("footer");
 ?>
