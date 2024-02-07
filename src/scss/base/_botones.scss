@@ -3,9 +3,12 @@
     @include tablet {
         width: 85%;
     }
+    width: 100%;
 }
 .boton-carrito-v2{
-    @include boton($sexto, block)
+    @include boton($sexto, block);
+    width: 100%;
+    height: 5rem;
 }
 .boton-submit{
     @include boton($primario, inline-block);

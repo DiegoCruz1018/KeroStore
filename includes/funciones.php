@@ -12,7 +12,7 @@ function estaAutenticado(){
     session_start();
     
     if(!$_SESSION['login']){
-        header('Location: /KeroShop/index.php');
+        header('Location: /KeroStore/index.php');
     }
 }
 

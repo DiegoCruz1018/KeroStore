@@ -1,7 +1,7 @@
 <?php 
     require '../includes/app.php';
 
-    estaAutenticado();
+    //estaAutenticado();
 
     use App\Producto;
 
@@ -38,7 +38,7 @@
     <?php $mensaje = mostrarNotificacion(intval($resultado));
         if($mensaje): ?>
             <p class="alerta exito">
-                <?php echo $mensaje; ?>
+                <?php echo s($mensaje); ?>
             </p>
     <?php endif; ?>
 
@@ -83,6 +83,8 @@
         </tbody>
     </table>
 </main>
+
+class="enlace-producto" href="../producto.php?id=<?php echo $producto->id; ?>"
 
 <?php 
     incluirTemplate("footer");

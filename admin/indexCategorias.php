@@ -1,7 +1,7 @@
 <?php 
     require '../includes/app.php';
 
-    estaAutenticado();
+    //estaAutenticado();
 
     use App\Categoria;
 
@@ -37,7 +37,7 @@
     <?php $mensaje = mostrarNotificacion(intval($resultado));
         if($mensaje): ?>
             <p class="alerta exito">
-                <?php echo $mensaje; ?>
+                <?php echo s($mensaje); ?>
             </p>
     <?php endif; ?>
 

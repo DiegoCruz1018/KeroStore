@@ -1,0 +1,35 @@
+.producto-grid{
+    @include tablet {
+        @include grid(2, 2);
+        margin-bottom: 2rem;
+    }
+
+    .producto-grid-imagen{
+        margin-right: 2rem;
+    }
+
+    .producto-grid-info{
+        @include tablet{
+            margin-top: 2rem;
+        }
+
+        .producto-detalle, label{
+            font-family: $fuente_header;
+            font-weight: bold;
+            color: $terciario;
+            text-align: center;
+            font-size: 2.5rem;
+
+            .producto-detalle-span{
+                font-family: $fuente_principal;
+                font-weight: normal;
+                color: $primario;
+            }
+
+            input{
+                border-radius: 1rem;
+                font-family: $fuente_principal;
+            }
+        }
+    }
+}

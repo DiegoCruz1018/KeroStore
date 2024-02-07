@@ -15,4 +15,13 @@ class Categoria extends ActiveRecord{
         $this->id = $args['id'] ?? null;
         $this->nombre = $args['nombre'] ?? '' ;
     }
+
+    public function validar()
+    {
+        if(!$this->nombre){
+            self::$errores[] = 'Debes darle un nombre a la categoria';
+
+            return self::$errores;
+        }
+    }
 }

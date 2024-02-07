@@ -1,7 +1,7 @@
 <?php
     require '../../includes/app.php';
 
-    estaAutenticado();
+    //estaAutenticado();
 
     use App\Producto;
     use App\Categoria;
@@ -16,10 +16,6 @@
 
     //Consulta para obtener todas las categorias
     $categorias = Categoria::all();
-
-    //Consultar para obtener las categorias
-    $consulta = "SELECT * FROM categorias";
-    $resultado = mysqli_query($db, $consulta);
 
     //Arreglo con mensajes de errores
     $errores = Producto::getErrores();

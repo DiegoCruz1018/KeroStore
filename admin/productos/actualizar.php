@@ -2,7 +2,7 @@
 
     require '../../includes/app.php';
 
-    estaAutenticado();
+    //estaAutenticado();
 
     use App\Producto;
     use App\Categoria;

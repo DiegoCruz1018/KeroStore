@@ -1,7 +1,11 @@
-<?php 
+<?php
     require 'includes/app.php';
 
+    use App\Producto;
+
     $db = conectarDB();
+
+    $productos = Producto::all();
 
     incluirTemplate('header', $inicio = true);
 ?>
@@ -50,64 +54,23 @@
 
             <h3>Nuestros Productos</h3>
 
-            <div href="producto.php" class="info-publicidad">
-                <a href="producto.php" class="publicidad">
-                    <div class="diseño-producto">
-                        <img src="build/img/info-playera.png" alt="Imagen playera">
-                    </div>
+            <div class="info-publicidad">
+                <?php foreach($productos as $producto): ?>
+                    <a href="producto.php?id=<?php echo $producto->id; ?>" class="publicidad">
+                        <div class="diseño-producto">
+                            <img src="/kerostore/imagenes/<?php echo $producto->imagen; ?>" alt="Imagen playera">
+                        </div>
 
-                    <h3>Playera</h3>
+                        <h3><?php echo $producto->nombre; ?></h3>
 
-                    <div class="agregar">
-                        <p>$350</p>
-                        <form action="">
-                            <input class="boton-carrito-v1" type="submit" value="Agregar">
-                        </form>
-                    </div>
-                </a>
-
-                <a class="publicidad">
-                    <div class="diseño-producto">
-                        <img src="build/img/info-gorro.png" alt="Imagen playera">
-                    </div>
-
-                    <h3>Gorra</h3>
-
-                    <div class="agregar">
-                        <p>$150</p>
-                        <form action="">
-                            <input class="boton-carrito-v1" type="submit" value="Agregar">
-                        </form>
-                    </div>
-                </a>
-
-                <a class="publicidad">
-                    <div class="diseño-producto">
-                        <img src="build/img/info-sueter.png" alt="Imagen playera">
-                    </div>
-                    <h3>Sueter</h3>
-
-                    <div class="agregar">
-                        <p>$470</p>
-                        <form action="">
-                            <input class="boton-carrito-v1" type="submit" value="Agregar">
-                        </form>
-                    </div>
-                </a>
-
-                <a class="publicidad">
-                    <div class="diseño-producto">
-                        <img src="build/img/info-playera.png" alt="Imagen playera">
-                    </div>
-                    <h3>Playera</h3>
-
-                    <div class="agregar">
-                        <p>$350</p>
-                        <form action="">
-                            <input class="boton-carrito-v1" type="submit" value="Agregar">
-                        </form>
-                    </div>
-                </a>
+                        <div class="agregar">
+                            <p><?php echo "$" . $producto->precio; ?></p>
+                            <form action="">
+                                <input class="boton-carrito-v1" type="submit" value="Agregar">
+                            </form>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
             </div>
         </section>
 
