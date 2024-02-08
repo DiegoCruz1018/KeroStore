@@ -65,11 +65,7 @@
 
         <h1>Actualizar Producto</h1>
 
-        <?php foreach($errores as $error): ?>
-            <p class="alerta error" >
-                <?php echo $error; ?>
-            </p>
-        <?php endforeach; ?>
+        <?php include_once __DIR__ . '/../../includes/templates/alertas.php'; ?>
 
         <a href="/kerostore/admin/index.php" class="boton-datos">Volver</a>
 

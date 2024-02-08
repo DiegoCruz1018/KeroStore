@@ -10,19 +10,50 @@ class ActiveRecord {
 
     //Errores 
     protected static $errores = [];
+    protected static $alertas = [];
 
     //Definir la conexión a la BD
     public static function setDB($database){
         self::$db = $database;
     }
 
+    public static function setAlerta($mensaje) {
+        static::$alertas[] = $mensaje;
+    }
+
+    // Validación
+    public static function getAlertas() {
+        return static::$alertas;
+    }
+
+    public static function setError($mensaje) {
+        static::$errores[] = $mensaje;
+    }
+
+    //Validación
+    public static function getErrores(){
+        return static::$errores;
+    }
+
     public function guardar(){
         if(!is_null($this->id)){
             //Actualizar
-            $this->actualizar();
+            $resultado = $this->actualizar();
+
+            //Mensaje de exito o error
+            if($resultado){
+                //Redireccionar al usuario
+                header('Location: /kerostore/admin/index.php?resultado=1');
+            }
         }else{
             //Creando un nuevo registro
-            $this->crear();
+            $resultado = $this->crear();
+
+            //Mensaje de exito o error
+            if($resultado){
+                //Redireccionar al usuario
+                header('Location: /kerostore/admin/index.php?resultado=1');
+            }
         }
     }
 
@@ -42,11 +73,7 @@ class ActiveRecord {
 
         $resultado = self::$db->query($query);
 
-        //Mensaje de exito o error
-        if($resultado){
-            //Redireccionar al usuario
-            header('Location: /kerostore/admin/index.php?resultado=1');
-        }
+        return $resultado;
     }
 
     public function actualizar(){
@@ -67,11 +94,7 @@ class ActiveRecord {
 
         $resultado = self::$db->query($query);
 
-        //Mensaje de exito o error
-        if($resultado){
-            //Redireccionar al usuario
-            header('Location: /kerostore/admin/index.php?resultado=2');
-        }
+        return $resultado;
     }
 
     //Eliminar un registro
@@ -137,11 +160,6 @@ class ActiveRecord {
         }
     }
 
-    //Validación
-    public static function getErrores(){
-        return static::$errores;
-    }
-
     public function validar(){
 
         static::$errores = [];
@@ -163,6 +181,15 @@ class ActiveRecord {
     public static function find($id){
 
         $query = "SELECT * FROM " . static::$tabla . " WHERE id = $id";
+
+        $resultado = self::consultarSQL($query);
+
+        return array_shift($resultado);
+    }
+
+    public static function where($columna, $valor){
+
+        $query = "SELECT * FROM " . static::$tabla . " WHERE $columna = '$valor'";
 
         $resultado = self::consultarSQL($query);
 

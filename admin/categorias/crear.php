@@ -35,11 +35,7 @@
 
     <h1>Nueva Categoria</h1>
 
-    <?php foreach($errores as $error): ?>
-        <div class="alerta error">
-            <?php echo $error; ?>
-        </div>
-    <?php endforeach; ?>
+    <?php include_once __DIR__ . '/../../includes/templates/alertas.php'; ?>
 
     <a href="/kerostore/admin/indexCategorias.php" class="boton-datos">Volver</a>
 

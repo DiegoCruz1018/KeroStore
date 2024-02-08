@@ -44,11 +44,7 @@
 
         <h1>Actualizar Categoria</h1>
 
-        <?php foreach($errores as $error): ?>
-            <p class="alerta error" >
-                <?php echo $error; ?>
-            </p>
-        <?php endforeach; ?>
+        <?php include_once __DIR__ . '/../../includes/templates/alertas.php'; ?>
 
         <a href="/kerostore/admin/indexCategorias.php" class="boton-datos">Volver</a>
 

@@ -1,5 +1,50 @@
-<?php 
+<?php
     require 'includes/app.php';
+
+    use App\Email;
+    use App\Usuario;
+
+    $usuario = new Usuario;
+
+    $errores = [];
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        
+        //Sincronizar datos
+        $usuario->sincronizar($_POST);
+
+        //Validar errores del formulario
+        $errores = $usuario->validarNuevaCuenta();
+
+        //Revisar que errores este vacio
+        if(empty($errores)){
+            //Verificar que el usuario no este registrado
+            $resultado = $usuario->existeUsuario();
+
+            if($resultado->num_rows){
+                $errores = Usuario::getErrores();
+            }else{
+                //Hashear el password
+                $usuario->hashPassword();
+
+                //Generar un Token único
+                $usuario->crearToken();
+
+                //Enviar el email
+                $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
+
+                $email->enviarConfirmacion();
+
+                //Crear el usuario
+                $resultado = $usuario->crear();
+
+                if($resultado){
+                    header('Location: /kerostore/mensaje.php');
+                }
+            }
+        }
+    }
+
     incluirTemplate('header');
 ?>
 
@@ -7,24 +52,26 @@
 
     <h1>Crea una cuenta</h1>
 
-    <form class="formulario">
+    <?php include_once __DIR__ . '/includes/templates/alertas.php'; ?>
+
+    <form class="formulario" method="post" action="crear-cuenta.php">
         <fieldset>
             <legend>Llena el formulario</legend>
 
             <label for="nombre">Nombre:</label>
-            <input type="nombre" name="nombre" placeholder="Tu Nombre">
+            <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre" value="<?php echo s($usuario->nombre); ?>">
 
             <label for="apellido">Apellido: </label>
-            <input type="apellido" name="apellido" placeholder="Tu Apellido">
+            <input type="text" id="apellido" name="apellido" placeholder="Tu Apellido" value="<?php echo s($usuario->apellido); ?>">
 
             <label for="telefono">Teléfono: </label>
-            <input type="telefono" name="telefono" placeholder="Tu Teléfono">
+            <input type="tel" id="telefono" name="telefono" placeholder="Tu Teléfono" value="<?php echo s($usuario->telefono); ?>">
 
             <label for="email">Email:</label>
-            <input type="email" name="email" placeholder="Tu Email">
+            <input type="email" id="email" name="email" placeholder="Tu Email" value="<?php echo s($usuario->email); ?>">
 
             <label for="password">Password: </label>
-            <input type="password" name="password" placeholder="Tu Password">
+            <input type="password" id="password" name="password" placeholder="Tu Password">
         </fieldset>
 
         <div class="alinear-derecha">
