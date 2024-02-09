@@ -1,5 +1,10 @@
 .footer{
     padding: calc($separacion / 2) 0;
     background-color: $terciario;
-    margin-bottom: 0;
+    width: 100%;
+}
+.abajo{
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }

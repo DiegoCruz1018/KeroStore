@@ -29,7 +29,7 @@
     incluirTemplate('header');
 ?>
 
-<main class="contenedor">
+<main class="contenedor contenido-centrado margin-top">
     <h1>Confirmar Cuenta</h1>
 
     <?php foreach($alertas as $alerta): ?>
@@ -47,5 +47,5 @@
 </main>
 
 <?php 
-    incluirTemplate('footer');
+    incluirTemplate('footer', $inicio = false, $abajo = true);
 ?>

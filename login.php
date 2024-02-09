@@ -1,5 +1,48 @@
-<?php 
+<?php
+
+use App\Usuario;
+
     require 'includes/app.php';
+
+    $errores = [];
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $auth = new Usuario($_POST);
+
+        $errores = $auth->validarLogin();
+
+        if(empty($errores)){
+            //Comprobar que el usuario exista
+            $usuario = Usuario::where('email', $auth->email);
+
+            if($usuario){
+                //Verificar el password
+                if($usuario->comprobarPasswordAndVerificado($auth->password)){
+                    //Autenticar al usuario
+                    session_start();
+
+                    $_SESSION['id'] = $usuario->id;
+                    $_SESSION['nombre'] = $usuario->nombre;
+                    $_SESSION['apellido'] = $usuario->apellido;
+                    $_SESSION['email'] = $usuario->email;
+                    $_SESSION['login'] = true;
+
+                    //Redireccionamiento
+                    if($usuario->idRol === '1'){
+                        $_SESSION['idRol'] = $usuario->idRol ?? null;
+                        header('Location: /kerostore/admin/index.php');
+                    }else{
+                        header('Location: /kerostore/index.php');
+                    }
+                }
+            }else{
+                Usuario::setError('Usuario no encontrado');
+            }
+        }
+    }
+
+    $errores = Usuario::getErrores();
+
     incluirTemplate('header');
 ?>
 
@@ -7,12 +50,14 @@
 
     <h1>Inicia Sesión</h1>
 
-    <form class="formulario">
+    <?php include_once __DIR__ . '/includes/templates/alertas.php'; ?>
+
+    <form class="formulario" method="post" action="login.php">
         <fieldset>
             <legend>Email y Password</legend>
 
             <label for="email">Email:</label>
-            <input type="email" name="email" placeholder="Tu Email">
+            <input type="email" name="email" placeholder="Tu Email" value="<?php echo $auth->email; ?>">
 
             <label for="password">Password: </label>
             <input type="password" name="password" placeholder="Tu Password">
@@ -31,5 +76,5 @@
 </main>
 
 <?php 
-    incluirTemplate('footer');
+    incluirTemplate('footer', $inicio = false, $abajo = true);
 ?>

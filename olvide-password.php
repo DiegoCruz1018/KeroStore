@@ -1,13 +1,60 @@
-<?php 
+<?php
+
+use App\Email;
+use App\Usuario;
+
     require 'includes/app.php';
+
+    $errores = [];
+    $alertas = [];
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+        $auth = new Usuario($_POST);
+
+        $errores = $auth->validarEmail();
+
+        if(empty($errores)){
+            $usuario = Usuario::where('email', $auth->email);
+
+            if($usuario && $usuario->confirmado = "1"){
+                //Generar un token
+                $usuario->crearToken();
+
+                $usuario->actualizar();
+
+                //Enviar el email
+                $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
+                $email->enviarInstrucciones();
+
+                //Alerta de exito
+                Usuario::setAlerta('Revisa tu email');
+
+            }else{
+                Usuario::setError('El usuario no existe o no esta confirmado');
+            }
+        }
+    }
+
+    $errores = Usuario::getErrores();
+    $alertas = Usuario::getAlertas();
+
     incluirTemplate('header');
 ?>
 
-<main class="contenedor seccion contenido-centrado mb-2">
+<main class="contenedor seccion contenido-centrado margin-top">
 
     <h1>Olvide mi Password</h1>
 
-    <form class="formulario">
+    <?php include_once __DIR__ . '/includes/templates/alertas.php'; ?>
+
+    <?php foreach($alertas as $alerta): ?>
+        <div class="alerta exito">
+            <?php echo $alerta ?>
+        </div>
+    <?php endforeach; ?>
+
+    <form class="formulario" method="post" action="olvide-password.php">
         <fieldset>
             <legend>Restablece tu password</legend>
 
@@ -28,5 +75,5 @@
 </main>
 
 <?php 
-    incluirTemplate("footer");
+    incluirTemplate('footer', $inicio = false, $abajo = true);
 ?>
