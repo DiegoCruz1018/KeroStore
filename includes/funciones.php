@@ -50,7 +50,19 @@ function s($html) : string{
 
 //Validar tipo de contenido
 function validarTipoContenido($tipo){
-    $tipos = ['categoria', 'producto'];
+    $tipos = ['categoria', 'producto', 'usuario'];
 
     return in_array($tipo, $tipos);
+}
+
+function iniciarSession() {
+    if(!isset($_SESSION)){
+        session_start();
+    }  
+}
+
+function isAdmin() : void{
+    if(!isset($_SESSION['idRol'])){
+        header('Location: /kerostore/index.php');
+    }
 }

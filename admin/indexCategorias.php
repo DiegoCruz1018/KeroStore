@@ -2,6 +2,13 @@
     require '../includes/app.php';
 
     //estaAutenticado();
+    iniciarSession();
+    isAdmin();
+
+    $nombre = $_SESSION['nombre'];
+    $apellido = $_SESSION['apellido'];
+
+    $auth = $_SESSION['login'] ?? false;
 
     use App\Categoria;
 
@@ -31,8 +38,20 @@
     incluirTemplate('header');
 ?>
 
+                <?php if($auth): ?>
+                    <a href="/KeroStore/logout.php">Log Out</a>
+                <?php else: ?>
+                    <a href="/KeroStore/login.php">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</header>
+
 <main class="contenedor">
     <h1>Administrador de KeroStore</h1>
+
+    <h3>Hola <span> <?php echo $nombre . " " . $apellido; ?> </span> </h3>
 
     <?php $mensaje = mostrarNotificacion(intval($resultado));
         if($mensaje): ?>

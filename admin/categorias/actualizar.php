@@ -4,6 +4,11 @@
 
     //estaAutenticado();
 
+    iniciarSession();
+    isAdmin();
+
+    $auth = $_SESSION['login'] ?? false;
+
     use App\Categoria;
 
     //Validar la URL por ID válido
@@ -40,6 +45,16 @@
     incluirTemplate('header');
 ?>
 
+                <?php if($auth): ?>
+                    <a href="/KeroStore/logout.php">Log Out</a>
+                <?php else: ?>
+                    <a href="/KeroStore/login.php">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</header>
+
     <main class="contenedor seccion">
 
         <h1>Actualizar Categoria</h1>
@@ -61,5 +76,5 @@
     </main>
 
 <?php 
-    incluirTemplate('footer');
+    incluirTemplate('footer', $inicio=false, $abajo=true);
 ?>

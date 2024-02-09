@@ -5,10 +5,23 @@
 
     $db = conectarDB();
 
+    iniciarSession();
+    $auth = $_SESSION['login'] ?? false;
+
     $productos = Producto::all();
 
     incluirTemplate('header', $inicio = true);
 ?>
+
+                        <?php if($auth): ?>
+                            <a href="/KeroStore/logout.php">Log Out</a>
+                        <?php else: ?>
+                            <a href="/KeroStore/login.php">Log In</a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </header>
 
         <main class="contenedor">
             <h2>Nuestra Variedad</h2>

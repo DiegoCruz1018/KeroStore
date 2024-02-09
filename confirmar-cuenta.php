@@ -4,6 +4,10 @@
 
     require 'includes/app.php';
 
+    iniciarSession();
+
+    $auth = $_SESSION['login'] ?? false;
+
     $alertas = [];
     $errores = [];
 
@@ -28,6 +32,16 @@
 
     incluirTemplate('header');
 ?>
+
+                <?php if($auth): ?>
+                    <a href="/KeroStore/logout.php">Log Out</a>
+                <?php else: ?>
+                    <a href="/KeroStore/login.php">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</header>
 
 <main class="contenedor contenido-centrado margin-top">
     <h1>Confirmar Cuenta</h1>

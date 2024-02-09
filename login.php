@@ -1,8 +1,12 @@
 <?php
 
-use App\Usuario;
-
     require 'includes/app.php';
+
+    use App\Usuario;
+
+    iniciarSession();
+
+    $auth = $_SESSION['login'] ?? false;
 
     $errores = [];
 
@@ -45,6 +49,16 @@ use App\Usuario;
 
     incluirTemplate('header');
 ?>
+
+                <?php if($auth): ?>
+                    <a href="/KeroStore/logout.php">Log Out</a>
+                <?php else: ?>
+                    <a href="/KeroStore/login.php">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</header>
 
 <main class="contenedor seccion contenido-centrado">
 

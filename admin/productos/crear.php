@@ -2,6 +2,8 @@
     require '../../includes/app.php';
 
     //estaAutenticado();
+    iniciarSession();
+    isAdmin();
 
     use App\Producto;
     use App\Categoria;
@@ -11,6 +13,8 @@
     // estaAutenticado();
 
     $db = conectarDB();
+
+    $auth = $_SESSION['login'] ?? false;
 
     $producto = new Producto;
 
@@ -58,6 +62,16 @@
 
     incluirTemplate('header');
 ?>
+
+                <?php if($auth): ?>
+                    <a href="/KeroStore/logout.php">Log Out</a>
+                <?php else: ?>
+                    <a href="/KeroStore/login.php">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</header>
 
 <main class="contenedor seccion">
 

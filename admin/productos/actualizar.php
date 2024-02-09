@@ -3,10 +3,14 @@
     require '../../includes/app.php';
 
     //estaAutenticado();
+    iniciarSession();
+    isAdmin();
 
     use App\Producto;
     use App\Categoria;
     use Intervention\Image\ImageManagerStatic as Image;
+
+    $auth = $_SESSION['login'] ?? false;
 
     //Validar la URL por ID válido
     $id = $_GET['id'];
@@ -60,6 +64,16 @@
 
     incluirTemplate('header');
 ?>
+
+                <?php if($auth): ?>
+                    <a href="/KeroStore/logout.php">Log Out</a>
+                <?php else: ?>
+                    <a href="/KeroStore/login.php">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</header>
 
     <main class="contenedor seccion">
 
