@@ -6,6 +6,12 @@
 
     .producto-grid-imagen{
         margin-right: 2rem;
+        background-color: $quinto;
+        padding: .2rem;
+        
+        img{
+            height: 55rem;
+        }
     }
 
     .producto-grid-info{
@@ -27,8 +33,11 @@
             }
 
             input{
+                width: 60%;
+                background-color: $blanco;
+                border: 1px solid $primario;
                 border-radius: 1rem;
-                font-family: $fuente_principal;
+                margin-bottom: 2rem;
             }
         }
     }

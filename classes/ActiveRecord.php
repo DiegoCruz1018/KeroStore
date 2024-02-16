@@ -43,7 +43,7 @@ class ActiveRecord {
             //Mensaje de exito o error
             if($resultado){
                 //Redireccionar al usuario
-                header('Location: /kerostore/admin/index.php?resultado=1');
+                header('Location: /kerostore/admin/index.php?resultado=2');
             }
         }else{
             //Creando un nuevo registro

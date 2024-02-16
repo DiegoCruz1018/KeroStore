@@ -87,5 +87,5 @@
 </main>
 
 <?php 
-    incluirTemplate('footer', $inicio=false, $abajo=true);
+    incluirTemplate('footer', $inicio=false, $abajo=false, $masAbajo=true);
 ?>

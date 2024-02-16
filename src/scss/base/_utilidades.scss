@@ -13,6 +13,7 @@
     width: 100%;
 }
 .margin-top{
+    margin-top: 8.5rem;
     @include tablet {
         margin-top: 8rem;
     }

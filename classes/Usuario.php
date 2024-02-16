@@ -6,30 +6,30 @@ class Usuario extends ActiveRecord{
 
     //Base de datos
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'token', 'confirmado', 'creado', 'idRol', 'telefono'];
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'telefono', 'password', 'token', 'confirmado', 'creado', 'idRol'];
 
     public $id;
     public $nombre;
     public $apellido;
     public $email;
+    public $telefono;
     public $password;
     public $token;
     public $confirmado;
     public $creado;
     public $idRol;
-    public $telefono;
 
     public function __construct($args = []){
         $this->id = $args['id'] ?? null;
         $this->nombre = $args['nombre'] ?? '';
         $this->apellido = $args['apellido'] ?? '';
         $this->email = $args['email'] ?? '';
+        $this->telefono = $args['telefono'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->token = $args['token'] ?? '';
         $this->confirmado = $args['confirmado'] ?? '0';
         $this->creado = date('Y-m-d');
         $this->idRol = $args['idRol'] ?? '2';
-        $this->telefono = $args['telefono'] ?? '';
     }
 
     public function validarNuevaCuenta(){

@@ -67,27 +67,30 @@
 
             <h3>Nuestros Productos</h3>
 
-            <div class="info-publicidad">
-                <?php foreach($productos as $producto): ?>
-                    <a href="producto.php?id=<?php echo $producto->id; ?>" class="publicidad">
+            <!-- <div class="info-publicidad">
+                <?php // foreach($productos as $producto): ?>
+                    <div class="publicidad">
                         <div class="diseño-producto">
-                            <img src="/kerostore/imagenes/<?php echo $producto->imagen; ?>" alt="Imagen playera">
+                            <img class="producto-imagen" src="/kerostore/imagenes/<?php echo $producto->imagen; ?>" alt="Imagen playera">
                         </div>
 
-                        <h3><?php echo $producto->nombre; ?></h3>
+                        <h3 class="nombre-producto" ><?php // echo $producto->nombre; ?></h3>
 
-                        <div class="agregar">
-                            <p><?php echo "$" . $producto->precio; ?></p>
-                            <form action="">
-                                <input class="boton-carrito-v1" type="submit" value="Agregar">
-                            </form>
+                        <p class="precio-producto"><?php // echo "$" . $producto->precio; ?></p>
+
+                        <div id="agregar" class="agregar">
+                            <a href="producto.php?id=<?php // echo $producto->id; ?>" class="boton-ver">Ver</a>
+                            <button id="agregarCarrito" class="agregar-carrito boton-carrito-v1">Agregar</button>
                         </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
+                    </div>
+                <?php // endforeach; ?>
+            </div>  -->
+
+            <!-- MOSTRAR LOS PRODUCTOS EXTRAIDOS DESDE UNA API -->
+            <div id="productos" class="info-publicidad"></div> 
         </section>
 
-        <script src="build/js/bundle.min.js" ></script>
+        <script src="build/js/bundle.min.js"></script>
     </body>
 
 <?php 

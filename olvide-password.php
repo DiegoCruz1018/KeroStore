@@ -82,12 +82,12 @@
     </form>
 
     <div class="contenedor contenido-centrado acciones">
-        <a href="crear-cuenta.php">¿Ya tienes cuenta? Inicia Sesión</a>
-        <a href="olvide-password.php">¿Aún no tienes cuenta? Crea Una</a>
+        <a href="login.php">¿Ya tienes cuenta? Inicia Sesión</a>
+        <a href="crear-cuenta.php">¿Aún no tienes cuenta? Crea Una</a>
     </div>
 
 </main>
 
 <?php 
-    incluirTemplate('footer', $inicio = false, $abajo = true);
+    incluirTemplate('footer', $inicio = false, $abajo = false, $masAbajo = true);
 ?>

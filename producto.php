@@ -50,11 +50,7 @@
 
                 <p class="producto-detalle">Cantidad: <input type="number" id="cantidad" placeholder="Cantidad" min="1"> </p>
 
-                <div class="agregar">
-                    <form class="formulario" action="">
-                        <input class="boton-carrito-v2" type="submit" value="Agregar">
-                    </form>
-                </div>
+                
             </div>
         </div>
 

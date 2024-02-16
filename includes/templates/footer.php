@@ -1,4 +1,4 @@
-<footer class="footer <?php echo $abajo ? 'abajo' : ''; ?>">
+<footer class="footer <?php echo $abajo ? 'abajo' : ''; ?> <?php echo $masAbajo ? 'mas-abajo' : ''; ?>">
     <div class="contenedor contenedor-footer">
         <div class="barra">
             <a class="a-header" href="/KeroStore/index.php"> Kero<span>Store</span> </a> 

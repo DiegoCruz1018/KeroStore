@@ -4,7 +4,15 @@
     width: 100%;
 }
 .abajo{
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    @include tablet{
+        margin-top: 8rem;
+    }
+}
+.mas-abajo{
+    margin-top: 8rem;
+    @include tablet{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
 }
